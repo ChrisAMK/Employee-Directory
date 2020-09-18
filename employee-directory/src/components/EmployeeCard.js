@@ -1,19 +1,19 @@
 import React, { Component } from "react";
+import '../css/style.css';
 
 class EmployeeCard extends Component {
 
-  render(props) {
-
-    const { order, image, name, phone, email, dob } = this.props
+  render() {
+    // Deconstruction the props variables so that we can use them in our JSX
+    const { order, image, name, phone, dob } = this.props
 
     return (
       <tr>
-        <td>{order}</td>
-        <td><img src={image} alt={name} /></td>
-        <td>{name}</td>
-        <td>{phone}</td>
-        <td>{email}</td>
-        <td>{dob}</td>
+        <td className="idRow">{order}</td>
+        <td className="imgRow"><img src={image} alt={name} /></td>
+        <td className="nameRow">{name}</td>
+        <td className="phoneRow">{phone}</td>
+        <td className="dobRow">{dob}</td>
       </tr>
     )
   }

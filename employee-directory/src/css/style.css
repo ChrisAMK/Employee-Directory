@@ -1,0 +1,65 @@
+* body{
+    font-family: 'Balsamiq Sans', cursive;
+}
+
+.tableHead {
+    background-color: gold;
+    padding: 10px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.rowHeading {
+    padding: 50px;
+}
+
+.header {
+    background-color: gold;
+    padding: 20px;
+    border-radius: 20px;
+    border-style: solid;
+    text-align: center;
+
+}
+
+.desc {
+    text-align: center;
+}
+
+.directoryContainer {
+    background: white;
+}
+
+.tableBody {
+    background-color: whitesmoke;
+}
+
+.idRow {
+    text-align: center;
+}
+
+.imgRow {
+    text-align: center;
+}
+
+.nameRow {
+    text-align: center;
+    font-size: larger;
+    font-weight: 600;
+}
+
+.phoneRow {
+    text-align: center;
+}
+
+.dobRow {
+    text-align: center;
+}
+
+.searchBar {
+    text-align: center;
+}
+
+.header {
+    text-align: center;
+}

@@ -45,16 +45,15 @@ class EmployeeDirectory extends React.Component {
     this.setState({ employees: newEmployeeList })
   }
 
-
-
+  // Render function is what is within the rendered component
   render() {
     
     return (
-      <>
+      <div className="container directoryContainer">
         <Header />
         <Search />
         <EmployeesTable employees={this.state.employees}/>
-      </>
+      </div>
     );
   }
 }

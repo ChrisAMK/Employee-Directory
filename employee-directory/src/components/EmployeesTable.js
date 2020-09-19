@@ -4,6 +4,31 @@ import '../css/style.css';
 
 class EmployeeTable extends React.Component {
 
+    renderEmployee = (employee, index) => {
+        let displayed;
+
+        if (employee.display === undefined) {
+            displayed = true;
+        } else {
+            displayed = employee.display;
+        }
+
+        if (displayed === true) {
+            return (
+                <EmployeeCard 
+                    key={index}
+                    order={index + 1}
+                    image={employee.image}
+                    name={employee.name}
+                    phone={employee.phone}
+                    email={employee.email}
+                    dob={employee.dob}
+                />
+            );
+        }
+
+    }
+
 
     // Inside this component we are setting the Heading and then adding EmployeeCards for each iteration of the Employees that are in the Props
     render() {
@@ -14,7 +39,7 @@ class EmployeeTable extends React.Component {
                         <tr className="rowHeading">
                             <th>#id</th>
                             <th>Image</th>
-                            <th>Name</th>
+                            <th title="Sort By Name" onClick={() => this.props.sortNames(this.props.employees)}>Name {this.props.sortArrow}</th>
                             <th>Phone</th>
                             <th>DOB</th>
                         </tr>
@@ -22,15 +47,7 @@ class EmployeeTable extends React.Component {
                     <tbody className="tableBody">
                         {   
                             this.props.employees.map((employee, index) => (
-                                <EmployeeCard 
-                                    key={index}
-                                    order={index + 1}
-                                    image={employee.image}
-                                    name={employee.name}
-                                    phone={employee.phone}
-                                    email={employee.email}
-                                    dob={employee.dob}
-                                />
+                                this.renderEmployee(employee, index)
                             ))
                         }
                     </tbody>

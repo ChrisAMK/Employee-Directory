@@ -9,7 +9,10 @@ class EmployeeDirectory extends React.Component {
 
   // State is like a in Component Database
   state = {
-    employees: []
+    employees: [],
+    query: '',
+    sortedEmployees: [],
+    sortType: ''
   }
 
   // The ComponentDidMount Function is invoked immediately after the component is mounted, mounting is what we call when the Component
@@ -45,14 +48,99 @@ class EmployeeDirectory extends React.Component {
     this.setState({ employees: newEmployeeList })
   }
 
+  filterNames = event => {
+    const query = event.target.value;
+    this.setState({query}, () => {
+      let employeesList;
+
+      if (this.state.sortedEmployees.length > 0) {
+        employeesList = this.state.sortedEmployees;
+      } else {
+        employeesList = this.state.employees;
+      }
+
+      const newEmployeeTable = employeesList.map(employee => {
+        let name = employee.name.toLowerCase();
+
+        if (name.indexOf(this.state.query.toLowerCase()) !== -1) {
+          return {...employee, display: true}
+        } else {
+          return {...employee, display: false}
+        }
+      });
+
+      this.setState({
+        employees: newEmployeeTable,
+        sortedEmployees: newEmployeeTable
+      });
+
+    });
+  }
+
+  sortNames = (employees) => {
+    const sortType = this.state.sortType;
+
+    if (sortType === 'desc' || sortType === '') {
+      employees.sort(this.dynamicSort("name"));
+      this.setState({
+        sortedEmployees: employees,
+        sortType: 'asc'
+      });
+    } else if (sortType === 'asc') {
+      employees.sort(this.dynamicSort("-name"));
+      this.setState({
+        sortedEmployees: employees,
+        sortType: 'desc'
+      });
+    }
+  }
+
+  dynamicSort = property => {
+    var sortOrder = 1;
+    if (property[0] === "-") {
+      sortOrder = -1;
+      property = property.substr(1);
+    }
+
+    return function (a,b) {
+      if (sortOrder === -1) {
+        return b[property].localeCompare(a[property]);
+      } else {
+        return a[property].localeCompare(b[property]);
+      }
+    }
+  }
+
   // Render function is what is within the rendered component
   render() {
+
+    let employeesList;
+
+    if (this.state.sortedEmployees.length > 0) {
+      employeesList = this.state.sortedEmployees;
+    } else {
+      employeesList = this.state.employees;
+    }
+
+    let sortArrow;
+
+    const sortState = this.state.sortType;
+
+    if (sortState === 'asc') {
+      //down arrow
+      sortArrow = <span>&#9660;</span>;
+      } else if (sortState === 'desc') {
+      //up arrow
+      sortArrow = <span>&#9650;</span>;
+      } else {
+      sortArrow = '';
+    }
     
     return (
       <div className="container directoryContainer">
         <Header />
-        <Search />
-        <EmployeesTable employees={this.state.employees}/>
+        <Search filterNames={this.filterNames} query={this.state.query}/>
+        <EmployeesTable employees={employeesList} sortNames={this.sortNames} sortArrow={sortArrow}/>
       </div>
     );
   }

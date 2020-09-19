@@ -3,7 +3,7 @@ import '../css/style.css';
 
 class EmployeeCard extends React.Component {
 
-  formatDate = () => {
+  displayProperDate = () => {
     const dateString = this.props.dob.toString();
     const yearEnd = dateString.indexOf('-');
     const year = dateString.substring(0, yearEnd);
@@ -27,7 +27,7 @@ class EmployeeCard extends React.Component {
         <td className="imgRow"><img src={image} alt={name} /></td>
         <td className="nameRow">{name}</td>
         <td className="phoneRow">{phone}</td>
-        <td className="dobRow">{this.formatDate()}</td>
+        <td className="dobRow">{this.displayProperDate()}</td>
       </tr>
     )
   }

@@ -4,6 +4,7 @@ import '../css/style.css';
 
 class EmployeeTable extends React.Component {
 
+    // here we are checking if the component is ready to be displayed, when ready we return the EmployeeCard component
     renderEmployee = (employee, index) => {
         let displayed;
 

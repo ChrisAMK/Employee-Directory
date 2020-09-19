@@ -48,17 +48,20 @@ class EmployeeDirectory extends React.Component {
     this.setState({ employees: newEmployeeList })
   }
 
+  // This function handles sorting Filtering by names
   filterNames = event => {
     const query = event.target.value;
     this.setState({query}, () => {
       let employeesList;
 
+      // if there is any changed to the search value, the employeelist is now equal to sorted employees
       if (this.state.sortedEmployees.length > 0) {
         employeesList = this.state.sortedEmployees;
       } else {
         employeesList = this.state.employees;
       }
 
+      // The the new table of employees is then mapped to New employee table
       const newEmployeeTable = employeesList.map(employee => {
         let name = employee.name.toLowerCase();
 
@@ -69,6 +72,7 @@ class EmployeeDirectory extends React.Component {
         }
       });
 
+      // updating the state to the new Employee Table
       this.setState({
         employees: newEmployeeTable,
         sortedEmployees: newEmployeeTable
@@ -77,15 +81,18 @@ class EmployeeDirectory extends React.Component {
     });
   }
 
+  // Here we are sorting the names in ascending order or descending order
   sortNames = (employees) => {
     const sortType = this.state.sortType;
 
+    // the sort type is desc or blank, we sort name and then set the sort type state to ascending
     if (sortType === 'desc' || sortType === '') {
       employees.sort(this.dynamicSort("name"));
       this.setState({
         sortedEmployees: employees,
         sortType: 'asc'
       });
+
     } else if (sortType === 'asc') {
       employees.sort(this.dynamicSort("-name"));
       this.setState({
@@ -95,6 +102,7 @@ class EmployeeDirectory extends React.Component {
     }
   }
 
+  // this helper function aids the sortNames function
   dynamicSort = property => {
     var sortOrder = 1;
     if (property[0] === "-") {
@@ -102,6 +110,7 @@ class EmployeeDirectory extends React.Component {
       property = property.substr(1);
     }
 
+    // we are returning a binary result from localeCompare
     return function (a,b) {
       if (sortOrder === -1) {
         return b[property].localeCompare(a[property]);

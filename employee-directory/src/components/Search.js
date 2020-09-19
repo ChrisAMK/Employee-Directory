@@ -8,7 +8,7 @@ class Search extends React.Component {
                 <form className="searchForm">
                     <div className="form-group mb-2 searchDiv">
                         <label htmlFor="Search" className=" sr-only searchLabel">Search a Name</label>
-                        <input type="text" className="form-control SearchInput" onChange={this.props.filterByName} placeholder="Search a name" />
+                        <input type="text" className="form-control SearchInput" onChange={this.props.filterNames} placeholder="Search a name" />
                     </div>
                 </form>
             </div>
